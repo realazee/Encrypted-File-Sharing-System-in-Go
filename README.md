@@ -12,23 +12,44 @@ To test the implementation, run `go test -v` inside of the `client_test` directo
 Implementation-Specific Documentation:
 
 Data Structures:
--User: (should be stored encrypted using a key generated with the password. Password is not stored anywhere. UUID should be generated with the username.) Attributes:
+-User: (should be stored encrypted using a key generated with the password. Password is not stored anywhere. UUID should be generated with the username.) 
+
+Attributes:
+
 -Username
+
 -user’s signing key SigningKey
+
 -user’s authPointer symmetric key FileKey -user’s invitation private key. InvitationKey
+
 -FileChunk Attributes:
+
 -NextChunkUUID (UUID corresponding to the next file chunk stored in DataStore) -Content
+
 -LastChunk UUID (UUID corresponding to the last chunk of the entire File)
+
 -FileAuth Attributes:
+
 -FileUUID (UUID of the file this “middleman” object points to)
+
 -Filekey to access file
+
 -Hash map of usernames to TopAuthDetails objects -IsOwner boolean flag
+
 -AuthPointer Attributes:
--AuthUUID (UUID of the FileAuth “middleman” this AuthPointer points to) -Authkey for encrypting/decrypting the FileAuth ciphertext.
+
+-AuthUUID (UUID of the FileAuth “middleman” this AuthPointer points to) 
+
+-Authkey for encrypting/decrypting the FileAuth ciphertext.
+
 -Invitation: Attributes
+
 -AuthUUID (UUID corresponding to the Auth Pointer)
+
 -Authkey for encrypting/decrypting Auth Pointer ciphertext. -TopAuthDetails (abstraction layer holding the UUID and key for a user’s FileAuth):
+
 Attributes
+
 -AuthUUID for FileAuth
 -AuthKey for FileAuth
 “Mailbox or Middleman” object fileAuth, sharing and revocation:
